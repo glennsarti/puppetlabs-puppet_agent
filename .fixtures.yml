@@ -5,6 +5,7 @@ fixtures:
       ref: "4.12.0"
     transition: "puppetlabs/transition"
     inifile: "puppetlabs/inifile"
+      ref: "2.1.0"
     apt:
       repo: "puppetlabs/apt"
       ref: "2.3.0"
