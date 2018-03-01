@@ -103,7 +103,7 @@
     },
     {
       "operatingsystem": "AIX",
-      "operatingsystemmajrelease": [
+      "operatingsystemrelease": [
         "5.3",
         "6.1",
         "7.1",
