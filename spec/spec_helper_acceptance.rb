@@ -1,6 +1,7 @@
 require 'beaker-rspec/spec_helper'
 require 'beaker-rspec/helpers/serverspec'
 require 'beaker/ca_cert_helper'
+require 'beaker/puppet_install_helper'
 require 'erb'
 
 def stop_firewall_on(host)
@@ -133,9 +134,27 @@ end
 def setup_puppet_on(host, opts = {})
   opts = {:agent => false, :mcollective => false}.merge(opts)
 
-  puts "Setup foss puppet on #{host}"
+
+  # ppetlabs-release-pc1-1.1.0-5.el7.noarch (install
+  # tc/pki/rpm-gpg/RPM-GPG-KEY-puppet-PC1
+  # ion check
+  # ion test
+  #  succeeded
+  # ion
+  # ltered outside of yum.
+  # uppet-agent-1.10.10-1.el7.x86_64
+  # uppet-agent-1.10.10-1.el7.x86_64
+
+
+  # 86_64 0:1.10.10-1.el7
+
+
+  puts "Setup puppet on #{host}"
   configure_defaults_on host, 'foss'
-  install_puppet_on host, :version => ENV['PUPPET_CLIENT_VERSION'] || '3.8.6'
+  require 'pry'; binding.pry if host.name == 'ubuntu1404-64-1'
+  ENV['PUPPET_INSTALL_VERSION'] = '1.7.0' unless ENV['PUPPET_INSTALL_VERSION']
+  run_puppet_install_helper
+  #install_puppet_on host, :version => ENV['PUPPET_CLIENT_VERSION'] || '1.7.1'
 
   puppet_opts = parser_opts(master.to_s)
   if host['platform'] =~ /windows/i
